@@ -1,0 +1,48 @@
+<section class="product">
+    <div class="product__container">
+        <div class="product__main">
+            <span class="land-section__line_top"></span>
+            <span class="land-section__line_bottom"></span>
+
+            <div class="product__slider product-slider main-slider swiper">
+                <div class="product-slider__wrapper swiper-wrapper">
+                    <div class="product-slider__slide product-slide swiper-slide">
+                        <a data-fancybox="gallery" data-src="{{{drug.thumb}}}">
+                            <img src="{{{drug.thumb}}}" alt="{{{drug.name}}}" class="product-slide__img" />
+                        </a>
+                    </div>
+                    {% if drug.thumbs.length %}
+                    {% for thumb in drug.thumbs %}
+                    <div class="product-slider__slide product-slide swiper-slide">
+                        <a data-fancybox="gallery" data-src="{{{thumb}}}">
+                            <img src="{{{thumb}}}" alt="{{{drug.name}}}" class="product-slide__img" />
+                        </a>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+
+                <div class="product-slider__pagination swiper-pagination"></div>
+            </div>
+
+            <div class="product__info product-info">
+                <div class="product-info__row">
+                    <h2 class="product-info__name">{{{drug.name}}}</h2>
+                    <span class="product-info__price">{{{drug.price}}}</span>
+                </div>
+
+                <div class="product-info__row product-info__buttons">
+                    <a href="#" class="product-info__add-to-cart">ADD TO CART</a>
+                    <a href="#" class="product-info__buy-now">BUY NOW</a>
+                </div>
+
+                <p class="product-info__desc">{{{drug.description}}}</p>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</section>

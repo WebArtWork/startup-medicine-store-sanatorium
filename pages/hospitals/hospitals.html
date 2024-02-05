@@ -1,0 +1,72 @@
+<script type="module">
+    import Hospital from '/api/wjst/hospitals';
+    import Dom from '/api/wjst/dom';
+    Hospital.perPage = 1;
+    let page = 1;
+
+    if ((await Hospital.page(1)).length < Hospital.perPage) {
+        Dom.remove('loadHospitals');
+    }
+
+    document.getElementById('loadHospitals').addEventListener('click', async () => {
+        page++;
+        const hospitalss = await Hospital.page(page);
+
+        if (hospitalss.length < Hospital.perPage) {
+            Dom.remove('loadHospitals');
+        }
+
+        for (const hospitals of hospitalss) {
+            if (!hospitals.thumbs) {
+                hospitals.thumbs = [];
+            }
+            Dom.add('hospitalss', Dom.template('hospitals', {
+                price: hospitals.price,
+                thumb: hospitals.thumb,
+                thumbs: hospitals.thumbs.map(thumb => {
+                    return Dom.template('hospitals_thumb', {
+                        name: hospitals.name,
+                        thumb
+                    })
+                }),
+                name: hospitals.name,
+                _id: hospitals._id
+            }));
+        }
+    });
+</script>
+
+<section class="institutions-page">
+    <div class="institutions-page__container">
+        <h2 class="institutions-page__title title">Hospitals</h2>
+
+        <div class="institutions-page__wrapper">
+            {% for hospital in hospitals %}
+
+            <a href="/hospital/{{{hospital.id}}}" class="institutions-page__card institutions-page-card">
+                <div class="institutions-page-card__img">
+                    <img src="{{{hospital.thumb}}}" alt="{{{hospital.name}}}" />
+                </div>
+                <span class="institutions-page-card__title">{{{hospital.name}}}</span>
+            </a>
+
+            {% endfor %}
+        </div>
+
+        <button class="load-more" id="loadHospitals">Load more</button>
+
+    </div>
+</section>
+
+<div style="display: none;" id="template-portfolio">
+    <a href="/hospital/{_id}" class="institutions-page__card institutions-page-card">
+        <div class="institutions-page-card__img">
+            <img src="{thumb}" alt="{name}" />
+        </div>
+        <span class="institutions-page-card__title">{name}</span>
+    </a>
+</div>
+
+<div style="display: none;" id="template-hospital_thumb">
+    <img src="{thumb}" alt="{name}" />
+</div>

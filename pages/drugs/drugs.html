@@ -1,0 +1,87 @@
+<script type="module">
+	import Drug from '/api/wjst/drug';
+	import Dom from '/api/wjst/dom';
+	Drug.perPage = 1;
+	let page = 1;
+
+    if ((await Drug.page(1)).length < Drug.perPage) {
+		Dom.remove('loadDrugs');
+	}
+
+	document.getElementById('loadDrugs').addEventListener('click', async () => {
+		page++;
+		const drugs = await Drug.page(page);
+
+        if (drugs.length < Drug.perPage) {
+		Dom.remove('loadDrugs');
+	}
+
+		for (const drug of drugs) {
+			if (!drug.thumbs) {
+				drug.thumbs = [];
+			}
+			Dom.add('drugs', Dom.template('drug', {
+				price: drug.price,
+				thumb: drug.thumb,
+				thumbs: drug.thumbs.map(thumb => {
+					return Dom.template('drug_thumb', {
+						name: drug.name,
+						thumb
+					})
+				}),
+				name: drug.name,
+				_id: drug._id
+			}));
+		}
+	});
+</script>
+
+<section class="products-page">
+    <div class="products-page__container">
+        <h1 class="products-page__title title">Drugs</h1>
+
+        <div class="products-page__wrapper">
+            {% for drug in drugs %}
+
+            <div class="products-page__card products-page-card">
+                <a href="/drug/{{{drug.id}}}" class="products-page-card__img">
+                    <img src="{{{drug.thumb}}}" alt="{{{drug.name}}}" />
+
+                    {% if drug.thumbs.length %} {% for thumb in
+                    drug.thumbs %}
+
+                    <img src="{{{thumb}}}" alt="{{{drug.name}}}" />
+                    {% endfor %} {% endif %}
+                </a>
+
+                <div class="products-page-card__text">
+                    <a href="/drug/{{{drug.id}}}" class="products-page-card__name">{{{drug.name}}}</a>
+                    <span class="products-page-card__price">{{{drug.price}}}</span>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+        <button class="load-more" id="loadDrugs">Load more</button>
+
+    </div>
+</section>
+
+<div style="display: none;" id="template-product">
+	<div class="products-page__card products-page-card">
+		<a href="/drug/{_id}" class="products-page-card__img">
+			<img src="{thumb}" alt="{name}" />
+			{thumbs}
+		</a>
+
+		<div class="products-page-card__text">
+			<a href="/drug/{_id}" class="products-page-card__name">{name}</a>
+			<span class="products-page-card__price">{price}</span>
+		</div>
+	</div>
+</div>
+
+<div style="display: none;" id="template-product_thumb">
+	<img src="{thumb}" alt="{name}" />
+</div>
