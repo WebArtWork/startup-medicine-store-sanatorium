@@ -26,16 +26,6 @@
 		"services_text": "Choose a template that will give your store a clean and modern look, allowing your products to appear more appealing and capture customers attention.",
 
 
-		"hospitals_title": "Hospitals",
-		"hospitals_button_text": "View all",
-		"hospitals_text": "Choose a template that will give your store a clean and modern look, allowing your products to appear more appealing and capture customers attention.",
-
-    
-		"pharmacies_title": "Pharmacies",
-		"pharmacies_button_text": "View all",
-		"pharmacies_text": "Choose a template that will give your store a clean and modern look, allowing your products to appear more appealing and capture customers attention.",
-
-
 		"drugs_title": "Drugs",
 		"drugs_button_text": "View all",
 		"drugs_text": "Choose a template that will give your store a clean and modern look, allowing your products to appear more appealing and capture customers attention.",
@@ -60,40 +50,6 @@
 	},
 
   "footer": {
-    "pharmacies": [
-      {
-        "id": "/pharmacy",
-        "thumb": "https://neryxomka.com/template/img/welcome.png",
-        "name": "pharmacy"
-      },
-      {
-        "id": "/pharmacy",
-        "thumb": "https://neryxomka.com/template/img/welcome.png",
-        "name": "pharmacy"
-      },
-      {
-        "id": "/pharmacy",
-        "thumb": "https://neryxomka.com/template/img/welcome.png",
-        "name": "pharmacy"
-      }
-    ],
-	"hospitals": [
-		{
-		  "id": "/hospital",
-		  "thumb": "https://neryxomka.com/template/img/welcome.png",
-		  "name": "hospital"
-		},
-		{
-		  "id": "/hospital",
-		  "thumb": "https://neryxomka.com/template/img/welcome.png",
-		  "name": "hospital"
-		},
-		{
-		  "id": "/hospital",
-		  "thumb": "https://neryxomka.com/template/img/welcome.png",
-		  "name": "hospital"
-		}
-	  ],
     "drugs": [
       {
         "id": "/drug",
